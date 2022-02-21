@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html> 
+  <head>
+    <title>First Dapp</title>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script src="https://npmcdn.com/moralis@0.0.6/dist/moralis.js"></script>
+    <script src="https://unpkg.com/moralis/dist/moralis.js"></script>
+    <script src="bundle.js"></script>
+    <script src="./menu.js"></script>
+  </head>
+  <body>
+    <center>
+    <h1>Hello World!</h1>
+    <button onclick="Login()">Login</button>
+    <button onclick="chain()">Test!</button>
+    <br />
+    <br />
+    <div id="x"></div>
+    
+    <h2>Characteristic of your HamHam:</h2>
+    <br />
+    <br />
+    <div id="l"></div>
+    <br />
+    <br />
+    <b>Strength : </b><div id="z"></div>
+    <b>Intelligence : </b><div id="y"></div>
+    <b>Patience : </b><div id="w"></div>
+    <b>Hunger : </b><div id="v"></div>
+    <b>Skill : </b><div id="s"></div>
+    <b>Rank : </b><div id="t"></div>
+    <b>Dream : </b><div id="p"></div>
+    </center>
+    <div id='mygame'></div>
+    <br />
+    <br /> 
+    <br />
+    <br />
+    <button onclick="logout()">Logout</button>
+    <script type="module"> 
+    //import TitleScene from './titleScene.js';
+    import Menu from './menu.js';
+
+// Our game scene
+//var gameScene = new GameScene();
+var menu = new Menu();
+
+
+//* Game scene */
+var config = {
+  type: Phaser.AUTO,
+  width: 1600,
+  height: 800,
+  scale: {
+    parent: 'mygame',
+    autoCenter: Phaser.Scale.CENTER_BOTH
+  }
+};
+var game = new Phaser.Game(config);
+
+// load scenes
+game.scene.add('Menu', menu);
+//game.scene.add("game", gameScene);
+
+// start title
+game.scene.start('Menu');
+
+
+
+  
+    
+
+    
+
+    
+    
+    
+    
+    </script>
+    <script type= "text/javascript">
+    
+    </script>
+  </body>
+</html>

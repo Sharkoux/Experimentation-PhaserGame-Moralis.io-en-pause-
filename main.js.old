@@ -1,0 +1,118 @@
+
+const fs = require('browserify-fs');
+const serverUrl = "URL MORALIS";
+const appId = "ID MORALIS";
+
+
+Moralis.start({serverUrl, appId});
+Moralis.enableWeb3();
+        
+    
+let user = Moralis.User.current();
+
+
+
+global.Login = async function() {
+
+
+
+if (!user) {
+    console.log("PLEASE LOG IN WITH METAMASK");
+    let user = await Moralis.Web3.authenticate();
+    location.reload();
+    }
+    else {
+    console.log(user.get("ethAddress") + " " + "logged in");
+    
+    }
+}
+
+
+global.chain = async function() {
+if (!user) {
+    alert("Connect your metamask");
+
+}
+else {
+const options = { chain: 'matic' };
+const polygonNFTs = await Moralis.Web3API.account.getNFTs(options);
+
+let chiffre = 1;
+let test = polygonNFTs.result.at(chiffre);
+//boucle tant que test.symbol =/ CHH polygonNFTs.result.at(+1)
+while (test.symbol != "CHH") {
+    console.log(test);
+    chiffre++;
+    test = polygonNFTs.result.at(chiffre);
+    if (chiffre > 499) {
+
+        console.log("stop");
+        test = null;
+        alert("You don't own a HamHam")
+        document.getElementById("x").innerHTML= "You don't own a HamHam!";
+        break
+    }
+}
+
+
+
+
+let test2 = test.metadata;  
+let test3 = test2.split('"');
+let test4 = test3.at(11).split('//').at(1);
+console.log(test4);
+
+var img = document.createElement("img");
+img.src = `https://gateway.ipfs.io/ipfs/${test4}`;
+var div = document.getElementById("x");
+div.innerHTML = '';
+div.appendChild(img);
+
+console.log(test2);
+
+let test5 = test2.split("trait_type");
+let test6 = test2.split("description")
+//affichage carac
+var desc = test6.at(1).split('"').at(2);
+var force = test5.at(1).split('"').at(6);
+var intel = test5.at(2).split('"').at(6);
+var Pat = test5.at(3).split('"').at(6);
+var faim = test5.at(4).split('"').at(6);
+var Skill = test5.at(5).split('"').at(6);
+var rang = test5.at(6).split('"').at(6);
+var reve = test5.at(7).split('"').at(6);
+
+console.log(force, intel, Pat, faim, Skill, rang, reve );
+
+document.getElementById("z").innerHTML= force;
+document.getElementById("y").innerHTML= intel;
+document.getElementById("w").innerHTML= Pat;
+document.getElementById("v").innerHTML= faim;
+document.getElementById("s").innerHTML= Skill;
+document.getElementById("t").innerHTML= rang;
+document.getElementById("p").innerHTML= reve;
+document.getElementById("l").innerHTML= desc;
+}
+}
+
+
+
+
+
+
+//if (!user) {
+//var message = "PLEASE LOG IN WITH METAMASK";
+//console.log(message)
+//alert(message)
+//	user = await Moralis.Web3.authenticate();
+//location.reload();
+//}
+
+global.logout = async function() {
+
+await Moralis.User.logOut();
+console.log("logged out");
+location.reload();
+}
+
+
